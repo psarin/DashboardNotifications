@@ -2,7 +2,7 @@
 // Separate for now, so we can limit changes to dashboards only, until they're proven robust.
 // May not play nicely with delete confirmation mode.
 enyo.kind({
-	name: "SwipeableNotificationItem",
+	name: "opflo.SwipeableNotificationItem",
 	kind: "onyx.SwipeableItem",
 	style:"height:100%; width:100%;",
 	events: {

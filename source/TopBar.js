@@ -1,18 +1,18 @@
 enyo.kind({
 	name:"opflo.TopBar",
 	kind:"FittableColumns",
-	style:"height:25px; padding:0px; background-color:gray; width:100%; border:1px solid green;",
+	style:"height:auto; min-height:25px; padding:0px; background-color:gray; width:100%;",
 	clientControls:[
 	{
 		kind: "Signals", 
 		onSendDashboardMessage:"processNewMessage"
 	},
 	{
-		name:"client"
+		fit:true,
+		name:"client", kind:"FittableColumns", //style:"padding:0px;"
 	},
-	{
-		fit:true
-	},
+	
+
 	{
 		name:"bannerArea",
 		kind:"opflo.BannerMessageArea",
@@ -20,6 +20,7 @@ enyo.kind({
 	{
 		name:"notificationArea",
 		kind:"MenuPopup",
+		style:"vertical-align:bottom; height:100%; z-index:11",
 		menuButton:
 		{
 			kind:"opflo.SwipeNotificationIcons",

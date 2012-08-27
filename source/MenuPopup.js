@@ -3,6 +3,7 @@
 enyo.kind({
 	name: "MenuPopup",
 	kind: "onyx.MenuDecorator", 
+	style:"vertical-align:bottom; ",
 	defaultClientKind:"onyx.MenuItem",
 	published:{
 		menuButton:{content:"Menu"},
@@ -14,14 +15,14 @@ enyo.kind({
 			name: "menuButton",
 			classes: "menupopup-menuButton",
 			layoutKind:"FittableColumnsLayout",
-			style:"padding:5px;",
+			//style:"height:20px;",
 			components:[]
 		},
 		{
 			name: "menu",
 			kind:"onyx.Menu", 
 			classes: "onyx enyo-unselectable menupopup-menu", 
-			style: "min-width: 320px; margin-top:-5px; padding:0px;",
+			style: "min-width: 320px; padding:0px; margin-top:-5px;",
 			floating:true, 
 			showOnTop:true,
 			activable:true,

@@ -1,48 +1,69 @@
 enyo.kind({
 	name:"opflo.BannerMessageArea",
-	//kind:"Scroller",
-	classes:"enyo-unselectable",
-	fit:true,
-	style:"width:40%; word-wrap:normal; padding:5px; margin-right:10px; overflow:hidden;",
-	vertical:"hidden",
-	direction:1,
+	kind:"Slideable",
+	min:0,
+	max:320,
+	value:320,
+	unit:"px",
+	classes:"enyo-unselectable notifications-layer",
+	style:"width:320px; position:absolute; right:0px; padding-right:10px; z-index:10; background-color:lightyellow;",
 	timeOut:2000,
+	handlers:{
+		onAnimateFinish: "animateFinished"
+	},
+	animateFinished: function(){
+		if (this.isAtMax()){
+			this.hide();
+		}
+		else{
+			this.show();
+		}
+	},
+	
 	components:[
 	{
-		tag:"span",
+		classes:"notifications-text-container",
 		name:"bannerMessage",
 		allowHtml:true,
-		style:"color:white; font-size:12px; font-weight:bold; position:relative; left:100%; overflow:hidden;"
+		style:"color:gray; font-size:12px; padding-left:20px; font-weight:bold; overflow:hidden;"
 	}],
 	create:function(){
 		this.inherited(arguments);
 	},
 	scrollMessage:function(){
+		this.animateToMin();
+		setTimeout(enyo.bind(this, "resetMessage"), this.timeOut);	
+		
+		/*
 		var newLeft = this.$.bannerMessage.getBounds().left - this.getBounds().left;
 		var subtractor = 10;
 		if (this.direction==-1) 
-			subtractor = 3;
+			subtractor = 1;
 		this.$.bannerMessage.applyStyle("left", (newLeft-subtractor) + "px");
-		if (newLeft<20)
+		//console.log(newLeft, subtractor, this.direction);
+		if (newLeft<=25)
 			this.direction = -1;
 			
 		if (this.direction==-1&&(this.$.bannerMessage.getBounds().left+this.$.bannerMessage.getBounds().width)>=(this.getBounds().left+this.getBounds().width)){
 			setTimeout(enyo.bind(this, "resetMessage"), this.timeOut);			
 			return;
 		}
-		if (newLeft>10||(this.direction==-1&&newLeft<300)){
+		if (newLeft>5||(this.direction==-1&&newLeft<300)){
 			this.bannerTimeout = setTimeout(enyo.bind(this, "scrollMessage"), 20);
 		};
+		*/
 	},
 	setMessage: function(message){
 		this.$.bannerMessage.setContent(message);
 	},
 	resetMessage: function(){
-		if (this.bannerTimeout)
+		if (this.bannerTimeout){
 			clearTimeout(this.bannerTimeout);
-		this.setMessage("");
-		this.$.bannerMessage.applyStyle("left", "100%");
-		this.direction=1;
+		}
+		this.animateToMax();
+		//this.setMessage("");
+		//this.$.bannerMessage.applyStyle("left", "100%");
+		//this.direction=1;
 	},
 	
 	showNewNotification: function(message, timeOut){
@@ -112,7 +133,7 @@ enyo.kind({
 		},
 		{
 			name: 'topSwipeable', 
-			kind:"SwipeableNotificationItem",
+			kind:"opflo.SwipeableNotificationItem",
 			contentClasses: "notifications-layer enyo-unselectable", 
 			allowLeft:false, 					
 			onSwipe:"topLayerSwiped",
@@ -344,7 +365,7 @@ enyo.kind({
 /** @private Text-label layer within dashboard window.*/
 enyo.kind({
 	name: "opflo.SwipeNotificationLayer",
-	kind:"SwipeableNotificationItem",
+	kind:"opflo.SwipeableNotificationItem",
 	contentClasses: "notifications-layer enyo-unselectable", //palm-dashboard-text-container",
 	style:"width:100%",
 	preventDragPropagation:true,
@@ -473,7 +494,7 @@ enyo.kind({
 				this.$.client.createComponent({
 						name: inEvent.originator.name,
 						kind:"onyx.Icon", 
-						src:"../assets/favicon.ico", 
+						src:"assets/favicon.ico", 
 						style:"width:20px;",
 				}, {owner:this});
 			}
