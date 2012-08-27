@@ -1,0 +1,126 @@
+/* Notifications module */
+
+body.notifications {
+	font-family: Prelude, 'Prelude Medium', 'Segoe UI', Arial, Helvetica, sans-serif;
+	margin: 0;
+	background:transparent;
+}
+
+.notification-module {
+	bottom:0px;
+	max-width:320px;
+	width:100%;
+	margin-bottom:3px;
+/*	-webkit-box-orient: horizontal;
+	-webkit-box-align: stretch;*/
+}
+
+/* individual targets */
+
+.notification-icon-container {
+	width: 50px;
+	margin-right: 4px;
+	margin-left: 6px;
+	margin-top: 2px;
+	position: relative;
+	background-color:transparent;
+}
+.notifications-text-container {
+	background: url("images/notification-divider.png") left top repeat-y;
+	color: black;
+	margin:0px;
+	margin-top: -1px;
+	margin-left: -7px;
+	border: none;
+	overflow: hidden;
+	min-height: 53px;
+	height:100% !important;
+	padding:0px;
+}
+
+.notifications-text-container > div {
+	padding-left: 21px;
+	padding-right:10px;
+	max-width:320px;
+}
+
+.layer-0  {
+	left: -4px;
+	background:none;
+}
+
+.layer-1 {
+	position:absolute;
+	left:5px;
+}
+
+.layer-2 {
+	position:absolute;
+	-webkit-transition: left 0.2s ease;
+	left:30px;
+}
+
+.notifications-layer {
+	overflow:hidden;
+	height:100%;
+	padding:0px;
+	vertical-align:top;
+}
+
+
+/* items within the containers */
+
+.notifications-icon {
+	width: 48px;
+	height: 48px;
+	background: url("images/notification-large-info.png") center center no-repeat;
+	border:0px solid black;
+}
+
+.notifications-icon.alert {
+	background: url("images/notification-alert.png") center left no-repeat;
+}
+
+.notifications-count { 
+	position: absolute;
+	right: -3px;
+	top: -3px;
+
+	line-height: 24px;
+	font-weight: bold;
+	height: 28px;
+	-webkit-border-image: url("images/dashboard-newitem-badge.png") 0 12 28 12 repeat stretch;
+	-webkit-box-sizing: border-box;
+	border-width: 0px 12px 0px 12px;
+}
+
+.notifications-icon-container:active .notifications-newitem,
+.notifications-icon-container.selected .notifications-newitem {
+	-webkit-border-image: url("images/dashboard-newitem-badge.png") 28 12 0 12 repeat stretch;
+}
+
+.notifications-count-label {
+	margin: 0 -4px;
+	font-size: 16px;
+	color: #FFF;
+}
+
+.notifications-title,
+.notifications-text {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.notifications-title {
+	font-weight: bold;
+	'postion:absolute;
+	margin-top:5px;
+	margin-left:0px;
+}
+
+.notifications-text {
+	font-size: 12px;
+	margin-top: -2px;
+	color:black;
+}
